@@ -23,14 +23,19 @@ public class BadCodeExample {
         sleep(3000);
 //       Verify that results list contains elements
         List<WebElement> searchResults = browser.findElements(By.xpath("//div[@class='srg']/div[@class='g']"));
-        System.out.println("Results count: " + searchResults.size());
+        if ( searchResults.size() == 10){
+            System.out.println("Results count: 10. Test Passed");
+        }
+        else System.out.println("Expected results count: 10. Actual results count: " + searchResults.size() + ". Test Failed");
 
 //        Verify, that each result contains searchTerm
         for (WebElement searchResult: searchResults){
             String searchResultText = searchResult.getText();
-            System.out.println(searchResultText);
+            if (searchResultText.contains("Selenium")){
+                System.out.println("Result contain term \"Selenium\". Test Passed");
+            }
+            else System.out.println("Each result should contain term \"Selenium\". Actual Result:" + searchResultText + "Test Failed");
         }
-//        searchResults.size();
 
         browser.close();
     }
