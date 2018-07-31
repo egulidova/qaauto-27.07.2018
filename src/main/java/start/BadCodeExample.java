@@ -1,6 +1,5 @@
 package start;
 
-import com.sun.tools.javac.util.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -29,12 +28,16 @@ public class BadCodeExample {
         else System.out.println("Expected results count: 10. Actual results count: " + searchResults.size() + ". Test Failed");
 
 //        Verify, that each result contains searchTerm
+        boolean containsTerm = true;
         for (WebElement searchResult: searchResults){
             String searchResultText = searchResult.getText();
-            if (searchResultText.contains("Selenium")){
-                System.out.println("Result contain term \"Selenium\". Test Passed");
+            if (!searchResultText.contains("Selenium")){
+                System.out.println("Result should contain term \"Selenium\". Actual Result:" + searchResultText + "Test Failed");
+                containsTerm = false;
             }
-            else System.out.println("Each result should contain term \"Selenium\". Actual Result:" + searchResultText + "Test Failed");
+        }
+        if (containsTerm) {
+            System.out.println("Each result contains term \"Selenium\". Test Passed");
         }
 
         browser.close();
