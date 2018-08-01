@@ -29,7 +29,7 @@ public class BadCodeExample {
 
 //        Verify, that each result contains searchTerm
         boolean containsTerm = true;
-        for (WebElement searchResult: searchResults){
+        for (ebElement searchResult: searchResults){
             String searchResultText = searchResult.getText();
             if (!searchResultText.contains("Selenium")){
                 System.out.println("Result should contain term \"Selenium\". Actual Result:" + searchResultText + "Test Failed");
