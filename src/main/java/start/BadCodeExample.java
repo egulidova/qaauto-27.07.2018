@@ -31,7 +31,7 @@ public class BadCodeExample {
         boolean containsTerm = true;
         for (WebElement searchResult: searchResults){
             String searchResultText = searchResult.getText();
-            if (!searchResultText.contains("Selenium")){
+            if (!searchResultText.toLowerCase().contains("selenium")){
                 System.out.println("Result should contain term \"Selenium\". Actual Result:" + searchResultText + "Test Failed");
                 containsTerm = false;
             }
