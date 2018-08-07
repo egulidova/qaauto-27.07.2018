@@ -9,6 +9,24 @@ public class LinkedinLoginTest {
 
     @Test
     public void successfulLoginTest(){
+        WebDriver browser = new FirefoxDriver();
+        browser.get("https://www.linkedin.com/");
+        WebElement userEmailField = browser.findElement(By.xpath("//input[@id=\"login-email\"]"));
+        WebElement userPasswordField = browser.findElement(By.xpath("//input[@id=\"login-password\"]"));
+        WebElement signInButton = browser.findElement(By.xpath("//input[@id=\"login-submit\"]"));
+
+        userEmailField.sendKeys("gulidova.elena@gmail.com");
+        userPasswordField.sendKeys("");
+        signInButton.click();
+
+        WebElement profileDropdown = browser.findElement(By.xpath("//*[@id=\"nav-settings__dropdown-trigger\"]"));
+        String pageUrl = browser.getCurrentUrl();
+        String pageTitle = browser.getTitle();
+
+        browser.close();
+        Assert.assertTrue(profileDropdown.isDisplayed(), "No profile dropdown on logged in page");
+        Assert.assertTrue(pageUrl.contains("/feed"), "Incorrect page url");
+        Assert.assertTrue(pageTitle.contains("LinkedIn"), "Incorrect page title");
 
     }
 
