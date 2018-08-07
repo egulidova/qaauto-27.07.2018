@@ -11,15 +11,15 @@ public class LinkedinLoginTest {
     public void successfulLoginTest(){
         WebDriver browser = new FirefoxDriver();
         browser.get("https://www.linkedin.com/");
-        WebElement userEmailField = browser.findElement(By.xpath("//input[@id=\"login-email\"]"));
-        WebElement userPasswordField = browser.findElement(By.xpath("//input[@id=\"login-password\"]"));
-        WebElement signInButton = browser.findElement(By.xpath("//input[@id=\"login-submit\"]"));
+        WebElement userEmailField = browser.findElement(By.xpath("//input[@id='login-email']'"));
+        WebElement userPasswordField = browser.findElement(By.xpath("//input[@id='login-password']"));
+        WebElement signInButton = browser.findElement(By.xpath("//input[@id='login-submit']"));
 
         userEmailField.sendKeys("gulidova.elena@gmail.com");
         userPasswordField.sendKeys("");
         signInButton.click();
 
-        WebElement profileDropdown = browser.findElement(By.xpath("//*[@id=\"nav-settings__dropdown-trigger\"]"));
+        WebElement profileDropdown = browser.findElement(By.xpath("//*[@id='nav-settings__dropdown-trigger']"));
         String pageUrl = browser.getCurrentUrl();
         String pageTitle = browser.getTitle();
 
