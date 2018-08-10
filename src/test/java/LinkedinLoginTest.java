@@ -12,6 +12,7 @@ import static java.lang.Thread.sleep;
 public class LinkedinLoginTest {
 
     WebDriver browser;
+    WebElement webElement;
 
     @BeforeMethod
     public void beforeMethod(){
@@ -30,11 +31,13 @@ public class LinkedinLoginTest {
         linkedinLoginPage.logIn("hellienathornton@gmail.com", "massaraksh");
         sleep(3000);
 
+        LinkedinHomePage linkedinHomePage = new LinkedinHomePage(browser, "//*[@id='profile-nav-item']");
+        boolean isProfileNavigationItemDisplayed = linkedinHomePage.isElementDisplayed();
+
         String pageUrl = browser.getCurrentUrl();
         String pageTitle = browser.getTitle();
-        WebElement profileDropdown = browser.findElement(By.xpath("//*[@id='profile-nav-item']"));
 
-        Assert.assertTrue(profileDropdown.isDisplayed(), "No profile dropdown on home page");
+        Assert.assertTrue(isProfileNavigationItemDisplayed, "No profile dropdown on home page");
         Assert.assertEquals(pageUrl, "https://www.linkedin.com/feed/", "Home page url incorrect");
         Assert.assertEquals(pageTitle, "LinkedIn", "Home page title incorrect");
 
