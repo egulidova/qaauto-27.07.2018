@@ -6,6 +6,8 @@ public class LinkedinLoginSubmitPage {
 
     private WebDriver browser;
     private WebElement alertBox;
+    private WebElement userEmailValidationText;
+    private WebElement userPassValidationText;
 
     public LinkedinLoginSubmitPage(WebDriver browser) {
         this.browser = browser;
@@ -14,18 +16,32 @@ public class LinkedinLoginSubmitPage {
 
     private void initElements(){
         alertBox = browser.findElement(By.xpath("//*[@role='alert']"));
+        userEmailValidationText = browser.findElement(By.xpath("//*[@id='session_key-login-error']"));
+        userPassValidationText = browser.findElement(By.xpath("//*[@id='session_password-login-error']"));
     }
 
     public String getAlertBoxText (){
         return alertBox.getText();
     }
 
-    public String getKeyLoginErrorText(){
-        return browser.findElement(By.xpath("//*[@id='session_key-login-error']")).getText();
-    }
-    public String getPasswordLoginErrorText(){
-        return browser.findElement(By.xpath("//*[@id='session_password-login-error']")).getText();
+    public String getCurrentPageUrl(){
+        return browser.getCurrentUrl();
     }
 
+    public String getCurrentPageTitle(){
+        return browser.getTitle();
+    }
+
+    public String getUserEmailValidationText(){
+        return userEmailValidationText.getText();
+    }
+    public String getUserPassValidationText(){
+        return userPassValidationText.getText();
+    }
+    public boolean isLoaded() {
+        return alertBox.isDisplayed()
+                && getCurrentPageTitle().equals("Sign In to LinkedIn")
+                && getCurrentPageUrl().contains("/uas/login-submit");
+    }
 
 }
