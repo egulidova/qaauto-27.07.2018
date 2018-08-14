@@ -34,4 +34,12 @@ public class LinkedinLoginPage {
         }
     }
 
+    public String getCurrentPageTitle(){
+        return browser.getTitle();
+    }
+
+    public String getCurrentPageUrl(){
+        return browser.getCurrentUrl();
+    }
+
 }

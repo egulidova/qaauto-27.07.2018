@@ -46,7 +46,7 @@ public class LinkedinLoginTest {
     @Test
     public void emptyPasswordOnLoginPageTest() {
         linkedinLoginPage.logIn("hellienathornton@gmail.com", "");
-        String url = browser.getCurrentUrl();
+        String url = linkedinLoginPage.getCurrentPageUrl();
 
         Assert.assertEquals(url, "https://www.linkedin.com/", "Redirect to " + url + "with empty password field.");
     }
