@@ -20,5 +20,12 @@ public class LinkedinLoginSubmitPage {
         return alertBox.getText();
     }
 
+    public String getKeyLoginErrorText(){
+        return browser.findElement(By.xpath("//*[@id='session_key-login-error']")).getText();
+    }
+    public String getPasswordLoginErrorText(){
+        return browser.findElement(By.xpath("//*[@id='session_password-login-error']")).getText();
+    }
+
 
 }
