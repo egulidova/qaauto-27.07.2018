@@ -43,9 +43,6 @@ public class LinkedinLoginTest {
                 "Incorrect message in alert box");
     }
 
-// make negative login tests
-//    equivalent classes
-
     @Test
     public void emptyPasswordOnLoginPageTest() {
         linkedinLoginPage.logIn("hellienathornton@gmail.com", "");
@@ -58,9 +55,6 @@ public class LinkedinLoginTest {
     public void wrongPasswordSubmitTest() {
         linkedinLoginPage.logIn("hellienathornton@gmail.com","123");
         LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(browser);
-        Assert.assertEquals(linkedinLoginSubmitPage.getAlertBoxText(),
-                "There were one or more errors in your submission. Please correct the marked fields below.",
-                "Incorrect message in alert box");
         Assert.assertEquals(linkedinLoginSubmitPage.getPasswordLoginErrorText(),
                 "The password you provided must have at least 6 characters.",
                 "Incorrect message for wrong password");
@@ -70,9 +64,6 @@ public class LinkedinLoginTest {
     public void wrongLoginSubmitTest() {
         linkedinLoginPage.logIn("a@b.c","massaraksh");
         LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(browser);
-        Assert.assertEquals(linkedinLoginSubmitPage.getAlertBoxText(),
-                "There were one or more errors in your submission. Please correct the marked fields below.",
-                "Incorrect message in alert box");
         Assert.assertEquals(linkedinLoginSubmitPage.getKeyLoginErrorText(),
                 "Please enter a valid email address.",
                 "Incorrect message for wrong password");
