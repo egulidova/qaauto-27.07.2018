@@ -1,4 +1,5 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -16,8 +17,14 @@ public class LinkedinLoginSubmitPage {
 
     private void initElements(){
         alertBox = browser.findElement(By.xpath("//*[@role='alert']"));
-        userEmailValidationText = browser.findElement(By.xpath("//*[@id='session_key-login-error']"));
-        userPassValidationText = browser.findElement(By.xpath("//*[@id='session_password-login-error']"));
+        try {
+            userEmailValidationText = browser.findElement(By.xpath("//*[@id='session_key-login-error']"));
+        }
+        catch (NoSuchElementException e){}
+        try {
+            userPassValidationText = browser.findElement(By.xpath("//*[@id='session_password-login-error']"));
+        }
+        catch (NoSuchElementException e){}
     }
 
     public String getAlertBoxText (){

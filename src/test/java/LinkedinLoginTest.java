@@ -44,13 +44,69 @@ public class LinkedinLoginTest {
         Assert.assertTrue(linkedinHomePage.isLoaded(), "Home page is not loaded.");
     }
 
-    @Test
-    public void negativeLoginTest() {
-        linkedinLoginPage.logIn("a@b.c", "123");
+
+    @DataProvider
+    public Object[][] invalidFieldsCombinationProvider() {
+        return new Object[][]{
+                {"hellienathornton@gmail.com", "123",
+                        "",
+                        "The password you provided must have at least 6 characters."},
+                {"hellienathornton@gmail.com", "123456",
+                        "",
+                        "Hmm, that's not the right password. Please try again or request a new one."},
+                {"a@b.c", "123",
+                        "Please enter a valid email address.",
+                        "The password you provided must have at least 6 characters."},
+                {"a@b.c", "123456",
+                        "Please enter a valid email address.",
+                        ""},
+                {"ыыы@иии.ccc", "123",
+                        "Please enter a valid email address.",
+                        "The password you provided must have at least 6 characters."},
+                {"ыыы@иии.ccc", "123456",
+                        "Please enter a valid email address.",
+                        ""},
+                {"aaa", "123",
+                        "Please enter a valid email address.",
+                        "The password you provided must have at least 6 characters."},
+                {"aaa", "123456",
+                        "Please enter a valid email address.",
+                        ""},
+                {"ыыы", "123",
+                        "",
+                        "The password you provided must have at least 6 characters."},
+                {"ыыы", "123456",
+                        "Be sure to include \"+\" and your country code.",
+                        ""},
+                {"123", "123",
+                        "",
+                        "The password you provided must have at least 6 characters."},
+                {"123", "123456",
+                        "Be sure to include \"+\" and your country code.",
+                        "The password you provided must have at least 6 characters."},
+                {"asdfghjklzasdfghjklzasdfghjklzasdfghjklzasdfghjklzasdfghjklzasdfghjklzasdfghjklzasdfghjklzasdfghjklzasdfghjklzasdfghjklzasdfghjklz",
+                        "asdfghjklzasdfghjklzasdfghjklzasdfghjklzasdfghjklzasdfghjklzasdfghjklz",
+                        "The text you provided is too long (the maximum length is 128 characters, your text contains 130 characters).",
+                        ""},
+                {"asdfghjklzas@bbb.ccc", "asdfghjklzasdfghjklzasdfghjklzasdfghjklzasdfghjklzasdfghjklzasdfghjklz",
+                        "Hmm, we don't recognize that email. Please try again.",
+                        ""}
+        };
+    }
+
+    @Test(dataProvider = "invalidFieldsCombinationProvider")
+    public void negativeLoginTest(String userEmail, String userPass, String emailValidationText, String passwordValidationText) {
+        linkedinLoginPage.logIn(userEmail, userPass);
         LinkedinLoginSubmitPage linkedinLoginSubmitPage = new LinkedinLoginSubmitPage(browser);
         Assert.assertEquals(linkedinLoginSubmitPage.getAlertBoxText(),
                 "There were one or more errors in your submission. Please correct the marked fields below.",
                 "Incorrect message in alert box");
+        Assert.assertEquals(linkedinLoginSubmitPage.getUserEmailValidationText(),
+                emailValidationText,
+                "Incorrect message for wrong password");
+        Assert.assertEquals(linkedinLoginSubmitPage.getUserPassValidationText(),
+                passwordValidationText,
+                "Incorrect message for wrong password");
     }
 
     @DataProvider
