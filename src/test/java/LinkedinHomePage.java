@@ -1,28 +1,16 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-public class LinkedinHomePage {
+public class LinkedinHomePage extends BasePage{
 
-    private WebDriver browser;
-
+    @FindBy(xpath = "//*[@id='profile-nav-item']")
     private WebElement profileNavigationItem;
 
     public LinkedinHomePage(WebDriver browser) {
         this.browser = browser;
-        initElements();
-    }
-
-    private void initElements(){
-        profileNavigationItem = browser.findElement(By.xpath("//*[@id='profile-nav-item']"));
-    }
-
-    public String getCurrentPageTitle(){
-        return browser.getTitle();
-    }
-
-    public String getCurrentPageUrl(){
-       return browser.getCurrentUrl();
+        PageFactory.initElements(browser, this);
     }
 
     public boolean isLoaded() {
