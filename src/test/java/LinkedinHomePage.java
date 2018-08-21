@@ -11,7 +11,7 @@ public class LinkedinHomePage extends BasePage{
     @FindBy(xpath = "//*[@id='profile-nav-item']")
     private WebElement profileNavigationItem;
 
-    @FindBy(xpath = "//*[@class='ember-view']/input")
+    @FindBy(xpath = "//input[@placeholder='Search' and @role]")
     private WebElement searchField;
 
     public LinkedinHomePage(WebDriver browser) {
@@ -19,8 +19,8 @@ public class LinkedinHomePage extends BasePage{
         PageFactory.initElements(browser, this);
     }
 
-    public LinkedinSearchPage linkedinSearchPage(String query){
-        searchField.sendKeys(query);
+    public LinkedinSearchPage search(String searchTerm){
+        searchField.sendKeys(searchTerm);
         searchField.sendKeys(Keys.ENTER);
         try {
             sleep(5000);

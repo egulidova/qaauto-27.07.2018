@@ -8,8 +8,11 @@ import java.util.stream.Collectors;
 
 public class LinkedinSearchPage extends BasePage{
 
-    @FindBy(xpath = "//*[@class='search-entity search-result search-result--person search-result--occlusion-enabled ember-view']")
+    @FindBy(xpath = "//li[contains(@class, 'search-result__occluded-item')]")
     private List<WebElement> searchResults;
+
+    @FindBy(xpath = "//h3[contains(@class, 'search-results__total')]")
+    private WebElement searchResultsTotal;
 
     public LinkedinSearchPage(WebDriver browser) {
         this.browser = browser;
@@ -21,13 +24,17 @@ public class LinkedinSearchPage extends BasePage{
         return searchResultsText;
     }
 
-    public boolean searchResultsTextContainsPattern(String pattern){
-        return getLinkedinSearchResultsText().stream().allMatch((el) -> el.contains(pattern));
+    public boolean isSearchResultsTextContainsSearchTerm(String searchTerm){
+        return getLinkedinSearchResultsText().stream().allMatch((el) -> el.contains(searchTerm));
+    }
+
+    public int getSearchResultsCount() {
+        return searchResults.size();
     }
 
     public boolean isLoaded() {
-        return searchResults.size() != 0
-                && getCurrentPageTitle().contains("Search")
+        return searchResultsTotal.isDisplayed()
+                && getCurrentPageTitle().contains("| Search | LinkedIn")
                 && getCurrentPageUrl().contains("/search/results/");
     }
 }
