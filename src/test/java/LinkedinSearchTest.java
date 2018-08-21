@@ -27,7 +27,7 @@ public class LinkedinSearchTest {
 
     @Test
     public void searchResultsOnSearchPage() {
-        LinkedinSearchPage linkedinSearchPage =  linkedinHomePage.linkedinSearchPage("HR");
+        linkedinSearchPage =  linkedinHomePage.linkedinSearchPage("HR");
         Assert.assertTrue(linkedinSearchPage.isLoaded(), "Search page is not loaded.");
         Assert.assertEquals(linkedinSearchPage.getLinkedinSearchResultsText().size(), 10, "Not enough search results on search page");
         Assert.assertTrue(linkedinSearchPage.searchResultsTextContainsPattern("hr"));
