@@ -27,8 +27,8 @@ public class LinkedinLoginTest {
     @DataProvider
     public Object[][] validFieldsCombinationProvider() {
         return new Object[][]{
-//                {"hellienathornton@gmail.com"},
-//                {" hellienathornton@gmail.com"},
+                {"hellienathornton@gmail.com"},
+                {" hellienathornton@gmail.com"},
                 {"HELLIENATHORNTON@GMAIL.COM"}
         };
     }
