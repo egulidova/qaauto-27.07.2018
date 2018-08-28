@@ -5,19 +5,18 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class LinkedinSearchTest {
+public class LinkedinPasswordResetTest {
 
     private WebDriver browser;
     private LinkedinLoginPage linkedinLoginPage;
-    private LinkedinHomePage linkedinHomePage;
-    private LinkedinSearchPage linkedinSearchPage;
+    private LinkedinForgotPasswordPage linkedinForgotPasswordPage;
+    private LinkedinResetPasswordPage linkedinResetPasswordPage;
 
     @BeforeMethod
     public void beforeMethod() {
         browser = new FirefoxDriver();
         browser.get("https://www.linkedin.com/");
         linkedinLoginPage = new LinkedinLoginPage(browser);
-        linkedinHomePage = linkedinLoginPage.logInToHomePage("hellienathornton@gmail.com","massaraksh1");
     }
 
     @AfterMethod
@@ -26,12 +25,11 @@ public class LinkedinSearchTest {
     }
 
     @Test
-    public void searchResultsOnSearchPage() {
-        Assert.assertTrue(linkedinHomePage.isLoaded(), "Home page is not loaded.");
-        linkedinSearchPage =  linkedinHomePage.search("HR");
-        Assert.assertTrue(linkedinSearchPage.isLoaded(), "Search page is not loaded.");
-        Assert.assertEquals(linkedinSearchPage.getSearchResultsCount(), 10, "Not enough search results on search page");
-        Assert.assertTrue(linkedinSearchPage.isSearchResultsTextContainsSearchTerm("hr"), "Search result text not contains query \"HR\"");
+    public void passwordResetTest() {
+        linkedinForgotPasswordPage = linkedinLoginPage.useForgotPasswordLink();
+        Assert.assertTrue(linkedinForgotPasswordPage.isLoaded(), "Forgot password page is not loaded.");
+        linkedinResetPasswordPage =  linkedinForgotPasswordPage.getResetPasswordLinkFromUserEmail();
+        Assert.assertTrue(linkedinResetPasswordPage.isLoaded(), "Reset password page is not loaded.");
     }
 
     // тест на забыл пароль

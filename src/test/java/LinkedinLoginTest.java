@@ -35,7 +35,7 @@ public class LinkedinLoginTest {
 
     @Test(dataProvider = "validFieldsCombinationProvider")
     public void successfulLoginTest(String userEmail) {
-        LinkedinHomePage linkedinHomePage =  linkedinLoginPage.logInToHomePage(userEmail, "massaraksh");
+        LinkedinHomePage linkedinHomePage =  linkedinLoginPage.logInToHomePage(userEmail, "massaraksh1");
         Assert.assertTrue(linkedinHomePage.isLoaded(), "Home page is not loaded.");
     }
 
