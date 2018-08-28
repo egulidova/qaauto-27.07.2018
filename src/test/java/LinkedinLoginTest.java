@@ -119,6 +119,5 @@ public class LinkedinLoginTest {
         Assert.assertTrue(linkedinLoginPage.isLoaded(), "User is not on login page");
     }
 
-    //Написать тест на поиск эйчаров
 
 }

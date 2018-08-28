@@ -5,12 +5,14 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class LinkedinPasswordResetTest {
+public class LinkedinResetPasswordTest {
 
     private WebDriver browser;
     private LinkedinLoginPage linkedinLoginPage;
     private LinkedinForgotPasswordPage linkedinForgotPasswordPage;
     private LinkedinResetPasswordPage linkedinResetPasswordPage;
+    private LinkedinResetSubmitPasswordPage linkedinResetSubmitPasswordPage;
+    private LinkedinHomePage linkedinHomePage;
 
     @BeforeMethod
     public void beforeMethod() {
@@ -30,8 +32,10 @@ public class LinkedinPasswordResetTest {
         Assert.assertTrue(linkedinForgotPasswordPage.isLoaded(), "Forgot password page is not loaded.");
         linkedinResetPasswordPage =  linkedinForgotPasswordPage.getResetPasswordLinkFromUserEmail();
         Assert.assertTrue(linkedinResetPasswordPage.isLoaded(), "Reset password page is not loaded.");
+        linkedinResetSubmitPasswordPage = linkedinResetPasswordPage.inputNewPassword();
+        Assert.assertTrue(linkedinResetSubmitPasswordPage.isLoaded(), "Submit new password page is not loaded.");
+        linkedinHomePage = linkedinResetSubmitPasswordPage.submitPasswordReset();
+        Assert.assertTrue(linkedinHomePage.isLoaded(), "Home page is not loaded.");
     }
 
-    // тест на забыл пароль
-    // на месте чтения почты в тесте поставить слип на 2 минуты, скопровать ссылку из почты и вставить в адресную строку
 }
