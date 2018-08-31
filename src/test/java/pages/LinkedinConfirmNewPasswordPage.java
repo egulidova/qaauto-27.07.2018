@@ -1,14 +1,16 @@
+package pages;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class LinkedinResetSubmitPasswordPage extends BasePage{
+public class LinkedinConfirmNewPasswordPage extends BasePage{
 
     @FindBy(xpath = "//button[@id='reset-password-submit-button']")
     private WebElement resetPasswordSubmitButton;
 
-    public LinkedinResetSubmitPasswordPage(WebDriver browser) {
+    public LinkedinConfirmNewPasswordPage(WebDriver browser) {
         this.browser = browser;
         PageFactory.initElements(browser, this);
     }

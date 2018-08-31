@@ -1,3 +1,5 @@
+package pages;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -65,8 +67,8 @@ public class LinkedinLoginPage extends BasePage{
                 && getCurrentPageTitle().equals("LinkedIn: Log In or Sign Up");
     }
 
-    public LinkedinForgotPasswordPage useForgotPasswordLink(){
+    public LinkedinRequestPasswordResetPage clickOnForgotPasswordLink(){
         forgotPasswordLink.click();
-        return new LinkedinForgotPasswordPage(browser);
+        return new LinkedinRequestPasswordResetPage(browser);
     }
 }
