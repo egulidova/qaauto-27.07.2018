@@ -9,33 +9,27 @@ import org.testng.annotations.Test;
 import page.LinkedinHomePage;
 import page.LinkedinLoginPage;
 import page.LinkedinSearchPage;
+import test.baseTest.BaseTest;
 
-public class LinkedinSearchTest {
+import java.util.List;
 
-    private WebDriver browser;
-    private LinkedinLoginPage linkedinLoginPage;
+public class LinkedinSearchTest  extends BaseTest {
+
     private LinkedinHomePage linkedinHomePage;
     private LinkedinSearchPage linkedinSearchPage;
 
-    @BeforeMethod
-    public void beforeMethod() {
-        browser = new FirefoxDriver();
-        browser.get("https://www.linkedin.com/");
-        linkedinLoginPage = new LinkedinLoginPage(browser);
-        linkedinHomePage = linkedinLoginPage.logInToHomePage("hellienathornton@gmail.com","massaraksh1");
-    }
-
-    @AfterMethod
-    public void afterMethod() {
-        browser.close();
-    }
-
     @Test
     public void searchResultsOnSearchPage() {
+        String searchTerm = "HR";
         Assert.assertTrue(linkedinHomePage.isLoaded(), "Home page is not loaded.");
-        linkedinSearchPage =  linkedinHomePage.search("HR");
+        linkedinSearchPage =  linkedinHomePage.search(searchTerm);
         Assert.assertTrue(linkedinSearchPage.isLoaded(), "Search page is not loaded.");
+
         Assert.assertEquals(linkedinSearchPage.getSearchResultsCount(), 10, "Not enough search results on search page");
-        Assert.assertTrue(linkedinSearchPage.isSearchResultsTextContainsSearchTerm("hr"), "Search result text not contains query \"HR\"");
+
+        List<String> searchResults = linkedinSearchPage.getSearchResultsList();
+        for (String searchResult: searchResults){
+            Assert.assertTrue(searchResult.toLowerCase().contains(searchTerm.toLowerCase()), "search term: "+searchTerm+" not found in: \n"+searchResult);
+        }
     }
 }

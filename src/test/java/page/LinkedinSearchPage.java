@@ -1,10 +1,12 @@
 package page;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,12 +35,13 @@ public class LinkedinSearchPage extends BasePage{
                 && getCurrentPageUrl().contains("/search/results/");
     }
 
-    public List<String> getLinkedinSearchResultsText(){
-        return searchResults.stream().map((el) -> el.getText().toLowerCase()).collect(Collectors.toList());
-    }
-
-    public boolean isSearchResultsTextContainsSearchTerm(String searchTerm){
-        return getLinkedinSearchResultsText().stream().allMatch((el) -> el.contains(searchTerm));
+    public List<String> getSearchResultsList(){
+       List<String> searchResultsList = new ArrayList<>();
+       for (WebElement searchResult: searchResults){
+           ((JavascriptExecutor) browser).executeScript("arguments[0].scrollIntoView();", searchResult);
+           searchResultsList.add(searchResult.getText());
+       }
+        return searchResultsList;
     }
 
     public int getSearchResultsCount() {

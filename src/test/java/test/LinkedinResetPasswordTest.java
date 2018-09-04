@@ -7,27 +7,16 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import page.*;
+import test.baseTest.BaseTest;
 
-public class LinkedinResetPasswordTest {
-    WebDriver browser;
-    LinkedinLoginPage linkedinLoginPage;
+public class LinkedinResetPasswordTest  extends BaseTest {
+
     LinkedinRequestPasswordResetPage linkedinRequestPasswordResetPage;
     LinkedinPasswordResetSubmitPage linkedinPasswordResetSubmitPage;
     LinkedinSetNewPasswordPage linkedinSetNewPasswordPage;
     LinkedinConfirmNewPasswordPage linkedinConfirmNewPasswordPage;
     LinkedinHomePage linkedinHomePage;
 
-    @BeforeMethod
-    public void beforeMethod() {
-        browser = new FirefoxDriver();
-        browser.get("https://www.linkedin.com/");
-        linkedinLoginPage = new LinkedinLoginPage(browser);
-    }
-
-    @AfterMethod
-    public void afterMethod() {
-        browser.close();
-    }
 
     @Test
     public void successfulResetPasswordTest() {

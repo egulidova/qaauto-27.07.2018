@@ -43,42 +43,25 @@ public class LinkedinLoginPage extends BasePage{
     }
 
     /**
-     * Method for login try from LoginPage.
-     * @param userEmail User email
-     * @param userPass User password
-     * @return LinkedinLoginPage
+     * Method that enters user email/user password and click Sign In button.
+     * @param userEmail String with user email.
+     * @param userPass String with user password.
+     * @param <T> Generic type to return corresponding pageObject.
+     * @return either LinkedinHomePage, or LinkedinLoginSubmitPage, or LinkedinLoginPage.
      */
-    public LinkedinLoginPage logInToLoginPage(String userEmail, String userPass){
+    public <T> T logIn(String userEmail, String userPass){ /**<T> T - generic type*/
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPass);
         signInButton.click();
-        return new LinkedinLoginPage(browser);
-    }
 
-    /**
-     * Method for login try from LoginPage.
-     * @param userEmail User email
-     * @param userPass User password
-     * @return LinkedinLoginSubmitPage
-     */
-    public LinkedinLoginSubmitPage logInToLoginSubmitPage(String userEmail, String userPass){
-        userEmailField.sendKeys(userEmail);
-        userPasswordField.sendKeys(userPass);
-        signInButton.click();
-        return new LinkedinLoginSubmitPage(browser);
-    }
-
-    /**
-     * Method for login try from LoginPage.
-     * @param userEmail User email
-     * @param userPass User password
-     * @return LinkedinHomePage.
-     */
-    public LinkedinHomePage logInToHomePage(String userEmail, String userPass){
-        userEmailField.sendKeys(userEmail);
-        userPasswordField.sendKeys(userPass);
-        signInButton.click();
-        return new LinkedinHomePage(browser);
+        if (getCurrentPageUrl().contains("/feed")){
+            return (T) new LinkedinHomePage(browser); /**(Type) another type - приведение типов*/
+        }
+        if (getCurrentPageUrl().contains("/uas/login-submit")){
+            return (T) new LinkedinLoginSubmitPage(browser);
+        } else{
+            return (T) this;
+        }
     }
 
     /**

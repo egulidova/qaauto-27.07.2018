@@ -10,23 +10,9 @@ import org.testng.annotations.Test;
 import page.LinkedinHomePage;
 import page.LinkedinLoginPage;
 import page.LinkedinLoginSubmitPage;
+import test.baseTest.BaseTest;
 
-public class LinkedinLoginTest {
-
-    private WebDriver browser;
-    private LinkedinLoginPage linkedinLoginPage;
-
-    @BeforeMethod
-    public void beforeMethod() {
-        browser = new FirefoxDriver();
-        browser.get("https://www.linkedin.com/");
-        linkedinLoginPage = new LinkedinLoginPage(browser);
-    }
-
-    @AfterMethod
-    public void afterMethod() {
-        browser.close();
-    }
+public class LinkedinLoginTest extends BaseTest {
 
     @DataProvider
     public Object[][] validFieldsCombinationProvider() {
@@ -40,7 +26,7 @@ public class LinkedinLoginTest {
 
     @Test(dataProvider = "validFieldsCombinationProvider")
     public void successfulLoginTest(String userEmail) {
-        LinkedinHomePage linkedinHomePage =  linkedinLoginPage.logInToHomePage(userEmail, "massaraksh1");
+        LinkedinHomePage linkedinHomePage =  linkedinLoginPage.logIn(userEmail, "massaraksh1");
         Assert.assertTrue(linkedinHomePage.isLoaded(), "Home page is not loaded.");
     }
 
@@ -96,7 +82,7 @@ public class LinkedinLoginTest {
 
     @Test(dataProvider = "invalidFieldsCombinationProvider")
     public void negativeLoginTest(String userEmail, String userPass, String emailValidationText, String passwordValidationText) {
-        LinkedinLoginSubmitPage linkedinLoginSubmitPage = linkedinLoginPage.logInToLoginSubmitPage(userEmail, userPass);
+        LinkedinLoginSubmitPage linkedinLoginSubmitPage = linkedinLoginPage.logIn(userEmail, userPass);
         Assert.assertTrue(linkedinLoginSubmitPage.isLoaded(), "User is not on LoginSubmit page");
         Assert.assertEquals(linkedinLoginSubmitPage.getAlertBoxText(),
                 "There were one or more errors in your submission. Please correct the marked fields below.",
@@ -120,7 +106,7 @@ public class LinkedinLoginTest {
 
     @Test(dataProvider = "EmptyFieldCombinationsProvider")
     public void validateEmptyUserEmailAndUserPass(String userEmail, String userPass) {
-        linkedinLoginPage.logInToLoginPage(userEmail, userPass);
+        linkedinLoginPage.logIn(userEmail, userPass);
         Assert.assertTrue(linkedinLoginPage.isLoaded(), "User is not on login page");
     }
 
