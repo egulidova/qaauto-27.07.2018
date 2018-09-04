@@ -20,15 +20,20 @@ public class LinkedinHomePage extends BasePage{
         waitUntilElementIsVisible(profileNavigationItem, 10);
     }
 
-    public LinkedinSearchPage search(String searchTerm){
-        searchField.sendKeys(searchTerm);
-        searchField.sendKeys(Keys.ENTER);
-        return new LinkedinSearchPage(browser);
-    }
-
+    /**
+     * Class to check if required element on page is displayed.
+     * @return true/false when reqiered element on page is/is not displayed.
+     */
+    @Override
     public boolean isLoaded() {
         return profileNavigationItem.isDisplayed()
                 && getCurrentPageTitle().contains("LinkedIn")
                 && getCurrentPageUrl().contains("/feed/");
+    }
+
+    public LinkedinSearchPage search(String searchTerm){
+        searchField.sendKeys(searchTerm);
+        searchField.sendKeys(Keys.ENTER);
+        return new LinkedinSearchPage(browser);
     }
 }

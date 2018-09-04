@@ -17,6 +17,11 @@ public class LinkedinPasswordResetSubmitPage extends BasePage {
         waitUntilElementIsVisible(resendLinkButton, 10);
     }
 
+    /**
+     * Class to check if required element on page is displayed.
+     * @return true/false when reqiered element on page is/is not displayed.
+     */
+    @Override
     public boolean isLoaded() {
         return resendLinkButton.isDisplayed()
                 && getCurrentPageTitle().contains("Please check your mail for reset password link.")

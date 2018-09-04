@@ -16,15 +16,19 @@ public class LinkedinConfirmNewPasswordPage extends BasePage{
         waitUntilElementIsVisible(resetPasswordSubmitButton,10);
     }
 
-    public LinkedinHomePage clickSubmitPasswordResetButton(){
-        resetPasswordSubmitButton.click();
-        return new LinkedinHomePage(browser);
-    }
-
+    /**
+     * Class to check if required element on page is displayed.
+     * @return true/false when reqiered element on page is/is not displayed.
+     */
     @Override
     public boolean isLoaded() {
         return resetPasswordSubmitButton.isDisplayed()
                 && getCurrentPageTitle().contains("You've successfully reset your password. | LinkedIn")
                 && getCurrentPageUrl().contains("/checkpoint/rp/password-reset-submit");
+    }
+
+    public LinkedinHomePage clickSubmitPasswordResetButton(){
+        resetPasswordSubmitButton.click();
+        return new LinkedinHomePage(browser);
     }
 }

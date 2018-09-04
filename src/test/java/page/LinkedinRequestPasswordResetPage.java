@@ -20,6 +20,17 @@ public class LinkedinRequestPasswordResetPage extends BasePage {
         waitUntilElementIsVisible(findAccountButton, 10);
     }
 
+    /**
+     * Class to check if required element on page is displayed.
+     * @return true/false when reqiered element on page is/is not displayed.
+     */
+    @Override
+    public boolean isLoaded() {
+        return findAccountButton.isDisplayed()
+                && getCurrentPageTitle().equals("Reset Password | LinkedIn")
+                && getCurrentPageUrl().contains("/uas/request-password-reset");
+    }
+
     public LinkedinPasswordResetSubmitPage findAccount(String userEmail) {
         gMailService.connect();
         userEmailField.sendKeys(userEmail);
@@ -27,11 +38,4 @@ public class LinkedinRequestPasswordResetPage extends BasePage {
         return new LinkedinPasswordResetSubmitPage(browser);
     }
 
-
-    @Override
-    public boolean isLoaded() {
-        return findAccountButton.isDisplayed()
-                && getCurrentPageTitle().equals("Reset Password | LinkedIn")
-                && getCurrentPageUrl().contains("/uas/request-password-reset");
-    }
 }

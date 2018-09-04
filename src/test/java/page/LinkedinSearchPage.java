@@ -22,6 +22,11 @@ public class LinkedinSearchPage extends BasePage{
         waitUntilElementIsVisible(searchResultsTotal, 10);
     }
 
+    /**
+     * Class to check if required element on page is displayed.
+     * @return true/false when reqiered element on page is/is not displayed.
+     */
+    @Override
     public boolean isLoaded() {
         return searchResultsTotal.isDisplayed()
                 && getCurrentPageTitle().contains("| Search | LinkedIn")
@@ -29,8 +34,7 @@ public class LinkedinSearchPage extends BasePage{
     }
 
     public List<String> getLinkedinSearchResultsText(){
-        List<String> searchResultsText = searchResults.stream().map((el) -> el.getText().toLowerCase()).collect(Collectors.toList());
-        return searchResultsText;
+        return searchResults.stream().map((el) -> el.getText().toLowerCase()).collect(Collectors.toList());
     }
 
     public boolean isSearchResultsTextContainsSearchTerm(String searchTerm){

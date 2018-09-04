@@ -22,6 +22,11 @@ public class LinkedinSetNewPasswordPage extends BasePage{
         waitUntilElementIsVisible(newPasswordInput, 10);
     }
 
+    /**
+     * Class to check if required element on page is displayed.
+     * @return true/false when reqiered element on page is/is not displayed.
+     */
+    @Override
     public boolean isLoaded() {
 
         return newPasswordInput.isDisplayed()

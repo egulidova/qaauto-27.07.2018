@@ -22,21 +22,26 @@ public class LinkedinLoginSubmitPage extends BasePage{
         waitUntilElementIsVisible(alertBox,3);
     }
 
-    public String getAlertBoxText (){
-        return alertBox.getText();
-    }
-
-    public String getUserEmailValidationText(){
-        return userEmailValidationText.getText();
-    }
-    public String getUserPassValidationText(){
-        return userPassValidationText.getText();
-    }
-
+    /**
+     * Class to check if required element on page is displayed.
+     * @return true/false when reqiered element on page is/is not displayed.
+     */
+    @Override
     public boolean isLoaded() {
         return alertBox.isDisplayed()
                 && getCurrentPageTitle().equals("Sign In to LinkedIn")
                 && getCurrentPageUrl().contains("/uas/login-submit");
+    }
+
+    public String getAlertBoxText (){
+        return alertBox.getText();
+    }
+    public String getUserEmailValidationText(){
+        return userEmailValidationText.getText();
+    }
+
+    public String getUserPassValidationText(){
+        return userPassValidationText.getText();
     }
 
 }
