@@ -1,4 +1,4 @@
-package pages;
+package page;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,6 +19,13 @@ public class LinkedinSearchPage extends BasePage{
     public LinkedinSearchPage(WebDriver browser) {
         this.browser = browser;
         PageFactory.initElements(browser, this);
+        waitUntilElementIsVisible(searchResultsTotal, 10);
+    }
+
+    public boolean isLoaded() {
+        return searchResultsTotal.isDisplayed()
+                && getCurrentPageTitle().contains("| Search | LinkedIn")
+                && getCurrentPageUrl().contains("/search/results/");
     }
 
     public List<String> getLinkedinSearchResultsText(){
@@ -32,11 +39,5 @@ public class LinkedinSearchPage extends BasePage{
 
     public int getSearchResultsCount() {
         return searchResults.size();
-    }
-
-    public boolean isLoaded() {
-        return searchResultsTotal.isDisplayed()
-                && getCurrentPageTitle().contains("| Search | LinkedIn")
-                && getCurrentPageUrl().contains("/search/results/");
     }
 }

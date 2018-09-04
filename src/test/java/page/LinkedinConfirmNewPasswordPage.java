@@ -1,4 +1,4 @@
-package pages;
+package page;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,9 +13,10 @@ public class LinkedinConfirmNewPasswordPage extends BasePage{
     public LinkedinConfirmNewPasswordPage(WebDriver browser) {
         this.browser = browser;
         PageFactory.initElements(browser, this);
+        waitUntilElementIsVisible(resetPasswordSubmitButton,10);
     }
 
-    public LinkedinHomePage submitPasswordReset(){
+    public LinkedinHomePage clickSubmitPasswordResetButton(){
         resetPasswordSubmitButton.click();
         return new LinkedinHomePage(browser);
     }

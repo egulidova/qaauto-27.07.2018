@@ -1,12 +1,13 @@
-package pages;
+package page;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static java.lang.Thread.sleep;
-
+/**
+ * Page object  class for LinkedinLoginPage.
+ */
 public class LinkedinLoginPage extends BasePage{
 
     @FindBy(xpath = "//input[@id='login-email']")
@@ -21,20 +22,25 @@ public class LinkedinLoginPage extends BasePage{
     @FindBy(xpath = "//a[@class='link-forgot-password']")
     private WebElement forgotPasswordLink;
 
+    /**
+     * Constructor of LinkedinLoginPage class.
+     * @param browser - WebDriver instance from test
+     */
     public LinkedinLoginPage(WebDriver browser) {
         this.browser = browser;
         PageFactory.initElements(browser,this);
+        waitUntilElementIsVisible(userEmailField, 10);
+    }
+
+    public boolean isLoaded() {
+        return userEmailField.isDisplayed()
+                && getCurrentPageTitle().equals("LinkedIn: Log In or Sign Up");
     }
 
     public LinkedinLoginPage logInToLoginPage(String userEmail, String userPass){
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPass);
         signInButton.click();
-        try {
-            sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         return new LinkedinLoginPage(browser);
     }
 
@@ -42,11 +48,6 @@ public class LinkedinLoginPage extends BasePage{
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPass);
         signInButton.click();
-        try {
-            sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         return new LinkedinLoginSubmitPage(browser);
     }
 
@@ -54,17 +55,7 @@ public class LinkedinLoginPage extends BasePage{
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPass);
         signInButton.click();
-        try {
-            sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         return new LinkedinHomePage(browser);
-    }
-
-    public boolean isLoaded() {
-        return userEmailField.isDisplayed()
-                && getCurrentPageTitle().equals("LinkedIn: Log In or Sign Up");
     }
 
     public LinkedinRequestPasswordResetPage clickOnForgotPasswordLink(){
